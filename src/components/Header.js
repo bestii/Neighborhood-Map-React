@@ -8,7 +8,7 @@ function Header(props) {
         <header>
             <div className="sticky-header box-shadow">
                 <div className="header-menu text-center d-inline-block w-10">
-                    <Icon className="cursor-pointer" size={20} icon={bars} />
+                    <Icon className="cursor-pointer" size={20} icon={bars}  onClick={props.openMenu}/>
                 </div>
                 <div className="header-content text-center d-inline-block w-80">
                     <h1 className="fs-20">Neigborhood Map</h1>
@@ -16,7 +16,7 @@ function Header(props) {
             </div>
             <nav className="menu menu-vertical menu-left box-shadow h-100" id="slider-menu">
                 <div className="text-right p-10">
-                    <Icon className="cursor-pointer" size={24} icon={close} />
+                    <Icon className="cursor-pointer" size={24} icon={close}  onClick={props.closeMenu}/>
                 </div>
                 <ul className="location-list">
                     <li>Celery seakale</li>
