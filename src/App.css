@@ -24,12 +24,6 @@
 	transition: all .5s ease;
 }
 
-.close{
-    position: absolute;
-    top: 10px;
-    right: 15px;
-}
-
 .location-list{
     margin-top: 50px;
 }
@@ -40,9 +34,6 @@
     left: 0;
     right: 0;
     height: 50px;   
-}
-.hamburger{
-    padding: 12px;
 }
 
 .cursor-pointer{
@@ -57,16 +48,20 @@
     text-align: center;
 }
 
+.text-right{
+    text-align: right;
+}
+
+.p-10{
+    padding: 10px
+}
+
 .d-inline-block{
     display: inline-block;
 }
 
 .fs-20{
     font-size: 20px;
-}
-
-.fs-24{
-    font-size: 24px;
 }
 
 .h-100{
