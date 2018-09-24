@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header.js'
+import Header from './components/Header'
+import Map from './components/Map';
+import Footer from './components/Footer';
 
 
 class App extends Component {
@@ -14,8 +16,13 @@ class App extends Component {
     menu.classList.remove('open');
   }
   render() {
+    const year = (new Date()).getFullYear();
     return (
-      <Header openMenu={this.openMenu} closeMenu={this.closeMenu}></Header>
+      <div>
+        <Header openMenu={this.openMenu} closeMenu={this.closeMenu}></Header>
+        <Map />
+        <Footer year={year}/>
+      </div>
     );
   }
 }
