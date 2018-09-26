@@ -14,7 +14,7 @@ function Header(props) {
                     <h1 className="fs-20">Neigborhood Map</h1>
                 </div>
             </div>
-            <nav className="menu menu-vertical menu-left box-shadow h-100" id="slider-menu">
+            <nav className="menu menu-vertical menu-left box-shadow h-100 open" id="slider-menu">
                 <div className="text-right p-10">
                     <Icon className="cursor-pointer" size={24} icon={close}  onClick={props.closeMenu}/>
                 </div>
