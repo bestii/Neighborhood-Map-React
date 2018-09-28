@@ -6,6 +6,45 @@ import Footer from './components/Footer';
 
 
 class App extends Component {
+  state = {
+    locations: [
+      {
+        lat:  9.96691498300256,
+        lng: 76.3181688690639,
+        name: 'Priceless Factory Outlet'
+      },
+      {
+        lat: 9.967080995007404,
+        lng: 76.31812928698632,
+        name: 'K R Bakes',
+      },
+      {
+        lat: 9.965904,
+        lng: 76.317918,
+        name: 'Broad Bean Hotel'
+      },
+      {
+        lat: 9.96387638705125,
+        lng: 76.31343589989426,
+        name: 'Welcare Hospital'
+      },
+      {
+        lat: 9.96387638705125,
+        lng: 76.31343589989426,
+        name: 'Golden dragon'
+      },
+      {
+        lat: 9.965679795023949,
+        lng: 76.31514928813195,
+        name: 'Hotel Emarald'
+      },
+      {
+        lat: 9.962810458403629,
+        lng: 76.31305656345499,
+        name: 'Toch Public School'
+      }
+    ]
+  }
 
   openMenu = () => {
     const menu = document.getElementById('slider-menu');
@@ -16,15 +55,15 @@ class App extends Component {
     menu.classList.remove('open');
   }
 
+  // Google Maps callback function
   initMap = () => {
     let map = new window.google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: {lat: -34.397, lng: 150.644}
+      zoom: 13,
+      center: { lat: 9.965459, lng: 76.313982 }
     });
   }
 
   componentDidMount() {
-    
     injectScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM3a6LipkX63QmWnyMBSo6uwSCFNh7Qk&callback=initMap');
     window.initMap = this.initMap;
   }
@@ -41,6 +80,7 @@ class App extends Component {
   }
 }
 
+// Function to inject script into the DOM
 function injectScript(url) {
   let tag = window.document.getElementsByTagName('script')[0];
   let script = window.document.createElement('script');
