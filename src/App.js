@@ -128,10 +128,12 @@ class App extends Component {
     const year = (new Date()).getFullYear();
     return (
       <div>
-        <Header 
+        <Header
           openMenu={this.openMenu}
           closeMenu={this.closeMenu}
-          markers={this.state.markers}></Header>
+          markers={this.state.markers}
+          updateQuery={this.updateQuery}
+          query={this.state.query}></Header>
         <Map />
         <Footer year={year} />
       </div>

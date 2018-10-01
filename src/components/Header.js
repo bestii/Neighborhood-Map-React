@@ -19,13 +19,16 @@ function Header(props) {
                     <Icon className="cursor-pointer" size={24} icon={close} onClick={props.closeMenu} />
                 </div>
                 <div>
-                    <input className="form-control" placeholder="Filter" />
+                    <input className="form-control"
+                        placeholder="Filter"
+                        value={props.query}
+                        onChange={(event) => { props.updateQuery(event.target.value) }} />
                 </div>
                 <ul className="location-list text-center">
                     {
                         props.markers.map((marker, indx) => {
                             return (
-                                <li className={'cursor-pointer' + (indx ? ' border-top' : '')} 
+                                <li className={'cursor-pointer' + (indx ? ' border-top' : '')}
                                     key={indx}>{marker.title}</li>
                             );
                         })
