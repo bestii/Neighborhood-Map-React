@@ -46,10 +46,13 @@ class App extends Component {
     ]
   }
 
+  // Function to open menue
   openMenu = () => {
     const menu = document.getElementById('slider-menu');
     menu.classList.add('open');
   }
+
+  // Function to close menue
   closeMenu = () => {
     const menu = document.getElementById('slider-menu');
     menu.classList.remove('open');
@@ -63,9 +66,15 @@ class App extends Component {
     });
   }
 
+  // React lifecycle method
   componentDidMount() {
-    injectScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM3a6LipkX63QmWnyMBSo6uwSCFNh7Qk&callback=initMap');
+
+    // Setup InitMap function in window object
     window.initMap = this.initMap;
+
+    // Inject google script
+    injectScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM3a6LipkX63QmWnyMBSo6uwSCFNh7Qk&callback=initMap');
+    
   }
 
   render() {
