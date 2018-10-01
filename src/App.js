@@ -9,7 +9,17 @@ import Footer from './components/Footer';
 class App extends Component {
 
   state = {
-    locations: []
+    map: '',
+    infowindow: '',
+    locations: [],
+    markers: [],
+    query: "",
+  }
+
+  updateQuery = (query) => {
+    this.setState({
+      query: query
+    })
   }
 
   // Function to open menue
@@ -32,29 +42,39 @@ class App extends Component {
       zoom: 16,
       center: { lat: 9.965459, lng: 76.313982 }
     });
-    
+
     // Infowindow object
     let infowindow = new window.google.maps.InfoWindow();
 
     // Add marker for each location
-    this.state.locations.map(location => {
+    let markerList = this.state.locations.map(location => {
 
       //Create Marker object
       let marker = new window.google.maps.Marker({
         map: map,
         draggable: true,
         animation: window.google.maps.Animation.DROP,
-        position: { lat: location.venue.location.lat, lng: location.venue.location.lng }
+        position: { lat: location.venue.location.lat, lng: location.venue.location.lng },
+        title: location.venue.name
       });
 
       // setup the content string for each location
       let contentString = `${location.venue.name}`;
 
       // Add event listener to each marker to open infowindow
-      marker.addListener('click', function() {
+      marker.addListener('click', function () {
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
       });
+
+      return marker;
+    });
+
+    // Set the map, marker and infowindow
+    this.setState({
+      map: map,
+      infowindow: infowindow,
+      markers: markerList
     });
 
   }
@@ -67,7 +87,8 @@ class App extends Component {
       ll: '9.965459,76.313982',
       radius: '1000',
       v: '20180926',
-      section: 'food'
+      section: 'food',
+      limit: '7'
     }
 
     axios.get(locationEndPoint, {
@@ -107,7 +128,10 @@ class App extends Component {
     const year = (new Date()).getFullYear();
     return (
       <div>
-        <Header openMenu={this.openMenu} closeMenu={this.closeMenu}></Header>
+        <Header 
+          openMenu={this.openMenu}
+          closeMenu={this.closeMenu}
+          markers={this.state.markers}></Header>
         <Map />
         <Footer year={year} />
       </div>
