@@ -19,7 +19,9 @@ function Header(props) {
                     <Icon className="cursor-pointer" size={24} icon={close} onClick={props.closeMenu} />
                 </div>
                 <div>
-                    <input className="form-control"
+                    <input id="filter"
+                        aria-labelledby="filter"
+                        className="form-control"
                         placeholder="Filter"
                         value={props.query}
                         onChange={(event) => { props.updateQuery(event.target.value) }} />
@@ -29,7 +31,7 @@ function Header(props) {
                         props.locations.map((location, indx) => {
                             if (location.showInList) {
                                 return (
-                                    <li className={'cursor-pointer' + (indx ? ' border-top' : '')}
+                                    <li className='cursor-pointer border-bottom'
                                         key={indx}
                                         onClick={props.openInfoWindow.bind(this, location)}>{location.name}</li>
                                 );

@@ -25,18 +25,19 @@ class App extends Component {
   };
 
   filterLocationList = (query) => {
-    let locationList = this.state.locationList.map(location => {
+    this.closeInfoWindow();
 
+    let locationList = this.state.locationList.map(location => {
       if (query) {
         const match = new RegExp(escapeRegExp(query), 'i');
-			  if(match.test(location.name)){
+        if (match.test(location.name)) {
           location.showInList = true;
           location.marker.setVisible(true);
-        }else{
+        } else {
           location.showInList = false;
           location.marker.setVisible(false);
         }
-      }else{
+      } else {
         location.showInList = true;
         location.marker.setVisible(true);
       }
@@ -52,6 +53,10 @@ class App extends Component {
   openInfoWindow = (location) => {
     this.state.infowindow.setContent(location.contentString);
     this.state.infowindow.open(this.state.map, location.marker);
+  };
+
+  closeInfoWindow = () => {
+    this.state.infowindow.close();
   };
 
   // Function to open menue

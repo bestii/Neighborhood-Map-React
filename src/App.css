@@ -133,8 +133,8 @@ body{
         width: 85%;
 }
 
-.border-top{
-    border-top: solid 1px #ccc;
+.border-bottom{
+    border-bottom: solid 1px #ccc;
 }
 
 .location-list {
