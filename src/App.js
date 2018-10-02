@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
+import escapeRegExp from 'escape-string-regexp';
 import Header from './components/Header'
 import Map from './components/Map';
 import Footer from './components/Footer';
@@ -19,12 +20,38 @@ class App extends Component {
   updateQuery = (query) => {
     this.setState({
       query: query
-    })
+    });
+    this.filterLocationList(query);
   };
 
-  openInfoWindow = (location) =>{
+  filterLocationList = (query) => {
+    let locationList = this.state.locationList.map(location => {
+
+      if (query) {
+        const match = new RegExp(escapeRegExp(query), 'i');
+			  if(match.test(location.name)){
+          location.showInList = true;
+          location.marker.setVisible(true);
+        }else{
+          location.showInList = false;
+          location.marker.setVisible(false);
+        }
+      }else{
+        location.showInList = true;
+        location.marker.setVisible(true);
+      }
+
+      return location;
+    });
+
+    this.setState({
+      locationList: locationList
+    });
+  }
+
+  openInfoWindow = (location) => {
     this.state.infowindow.setContent(location.contentString);
-    this.state.infowindow.open(this.state.map,location.marker);
+    this.state.infowindow.open(this.state.map, location.marker);
   };
 
   // Function to open menue
@@ -72,7 +99,7 @@ class App extends Component {
       // Add event listener to each marker to open infowindow
       location.marker.addListener('click', function () {
         infowindow.setContent(location.contentString);
-        infowindow.open(map,location.marker);
+        infowindow.open(map, location.marker);
       });
 
       return location;
