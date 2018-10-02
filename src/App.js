@@ -67,6 +67,7 @@ class App extends Component {
       location.contentString = `${location.venue.name}`;
 
       location.name = location.venue.name;
+      location.showInList = true;
 
       // Add event listener to each marker to open infowindow
       location.marker.addListener('click', function () {
