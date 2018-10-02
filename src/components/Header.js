@@ -12,7 +12,7 @@ function Header(props) {
                 </div>
                 <div className="header-content text-center d-inline-block w-80">
                     <h1 className="fs-20">
-                        <a href="/" tabindex="-1">Neigborhood Map</a>
+                        <a tabIndex="-1">Neigborhood Map</a>
                     </h1>
                 </div>
             </div>

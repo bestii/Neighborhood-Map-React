@@ -133,8 +133,8 @@ class App extends Component {
   getLocation = () => {
     const locationEndPoint = 'https://api.foursquare.com/v2/venues/explore';
     const parameters = {
-      client_id: 'LWKO1TIGB3UBE1K1XMEQEJXLEYGDXCO5N1RVBKH0US3OA3JC',
-      client_secret: 'W1OTJSKFMFJ0RZZF3PRFN2LC1SUS3YQAOUJCQK05KQZVYOLD',
+      client_id: '<ADD_FORURSQUARE_CLIENT_ID_HERE>',
+      client_secret: '<ADD_FORURSQUARE_CLIENT_SECRET_HERE>',
       ll: '9.965459,76.313982',
       radius: '1000',
       v: '20180926',
@@ -153,7 +153,7 @@ class App extends Component {
       );
 
     }).catch(error => {
-      console.error("Get request failed", error);
+      console.error("Request Failed", error);
     })
   };
 
@@ -164,7 +164,7 @@ class App extends Component {
     window.initMap = this.initMap;
 
     // Inject google script
-    injectScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM3a6LipkX63QmWnyMBSo6uwSCFNh7Qk&callback=initMap');
+    injectScript('https://maps.googleapis.com/maps/api/js?key=<ADD_GOOGLE_MAPS_API_KEY_HERE>');
 
   };
 
