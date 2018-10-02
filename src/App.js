@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 
 class App extends Component {
 
+  // App state
   state = {
     map: '',
     infowindow: '',
@@ -17,16 +18,22 @@ class App extends Component {
     query: "",
   };
 
+  // Update query function
   updateQuery = (query) => {
     this.setState({
       query: query
     });
+    // Filter the list when the query is updated 
     this.filterLocationList(query);
   };
 
+  // Function to filter the list based on the query
   filterLocationList = (query) => {
-    this.closeInfoWindow();
 
+    // Close any active infowindow when filter is applied
+    this.closeInfoWindow();
+    
+    // Get the filtered location list
     let locationList = this.state.locationList.map(location => {
       if (query) {
         const match = new RegExp(escapeRegExp(query), 'i');
@@ -50,11 +57,13 @@ class App extends Component {
     });
   }
 
+  // Function to open infowindow
   openInfoWindow = (location) => {
     this.state.infowindow.setContent(location.contentString);
     this.state.infowindow.open(this.state.map, location.marker);
   };
 
+  // Function to close infowindow
   closeInfoWindow = () => {
     this.state.infowindow.close();
   };
@@ -120,6 +129,7 @@ class App extends Component {
 
   };
 
+  // Function to get the nearby locations using Foursquare API
   getLocation = () => {
     const locationEndPoint = 'https://api.foursquare.com/v2/venues/explore';
     const parameters = {
@@ -147,6 +157,7 @@ class App extends Component {
     })
   };
 
+  // Function to setup Google maps
   setupGoogleMaps = () => {
 
     // Setup InitMap function in window object

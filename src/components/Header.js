@@ -11,7 +11,9 @@ function Header(props) {
                     <Icon className="cursor-pointer" size={20} icon={bars} onClick={props.openMenu} />
                 </div>
                 <div className="header-content text-center d-inline-block w-80">
-                    <h1 className="fs-20">Neigborhood Map</h1>
+                    <h1 className="fs-20">
+                        <a href="/" tabindex="-1">Neigborhood Map</a>
+                    </h1>
                 </div>
             </div>
             <nav className="menu menu-vertical menu-left box-shadow h-100 open" id="slider-menu">
@@ -33,7 +35,9 @@ function Header(props) {
                                 return (
                                     <li className='cursor-pointer border-bottom'
                                         role="button"
+                                        tabIndex="0"
                                         key={indx}
+                                        onKeyPress={props.openInfoWindow.bind(this, location)}
                                         onClick={props.openInfoWindow.bind(this, location)}>{location.name}</li>
                                 );
                             }

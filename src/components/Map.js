@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Functional Maps component
 function Map(props){
     return(
         <div id="map-container">
