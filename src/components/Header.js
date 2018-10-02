@@ -26,10 +26,11 @@ function Header(props) {
                 </div>
                 <ul className="location-list text-center">
                     {
-                        props.markers.map((marker, indx) => {
+                        props.locations.map((location, indx) => {
                             return (
                                 <li className={'cursor-pointer' + (indx ? ' border-top' : '')}
-                                    key={indx}>{marker.title}</li>
+                                    key={indx}
+                                    onClick={props.openInfoWindow.bind( this, location)}>{location.name}</li>
                             );
                         })
                     }

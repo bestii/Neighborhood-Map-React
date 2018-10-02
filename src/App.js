@@ -12,27 +12,32 @@ class App extends Component {
     map: '',
     infowindow: '',
     locations: [],
-    markers: [],
+    locationList: [],
     query: "",
-  }
+  };
 
   updateQuery = (query) => {
     this.setState({
       query: query
     })
-  }
+  };
+
+  openInfoWindow = (location) =>{
+    this.state.infowindow.setContent(location.contentString);
+    this.state.infowindow.open(this.state.map,location.marker);
+  };
 
   // Function to open menue
   openMenu = () => {
     const menu = document.getElementById('slider-menu');
     menu.classList.add('open');
-  }
+  };
 
   // Function to close menue
   closeMenu = () => {
     const menu = document.getElementById('slider-menu');
     menu.classList.remove('open');
-  }
+  };
 
   // Google Maps callback function
   initMap = () => {
@@ -47,10 +52,10 @@ class App extends Component {
     let infowindow = new window.google.maps.InfoWindow();
 
     // Add marker for each location
-    let markerList = this.state.locations.map(location => {
+    let locationList = this.state.locations.map(location => {
 
       //Create Marker object
-      let marker = new window.google.maps.Marker({
+      location.marker = new window.google.maps.Marker({
         map: map,
         draggable: true,
         animation: window.google.maps.Animation.DROP,
@@ -59,25 +64,27 @@ class App extends Component {
       });
 
       // setup the content string for each location
-      let contentString = `${location.venue.name}`;
+      location.contentString = `${location.venue.name}`;
+
+      location.name = location.venue.name;
 
       // Add event listener to each marker to open infowindow
-      marker.addListener('click', function () {
-        infowindow.setContent(contentString);
-        infowindow.open(map, marker);
+      location.marker.addListener('click', function () {
+        infowindow.setContent(location.contentString);
+        infowindow.open(map,location.marker);
       });
 
-      return marker;
+      return location;
     });
 
     // Set the map, marker and infowindow
     this.setState({
       map: map,
       infowindow: infowindow,
-      markers: markerList
+      locationList: locationList
     });
 
-  }
+  };
 
   getLocation = () => {
     const locationEndPoint = 'https://api.foursquare.com/v2/venues/explore';
@@ -104,7 +111,7 @@ class App extends Component {
     }).catch(error => {
       console.error("Get request failed", error);
     })
-  }
+  };
 
   setupGoogleMaps = () => {
 
@@ -114,14 +121,15 @@ class App extends Component {
     // Inject google script
     injectScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyAUM3a6LipkX63QmWnyMBSo6uwSCFNh7Qk&callback=initMap');
 
-  }
+  };
+
   // React lifecycle method
   componentDidMount() {
 
     // Get the locations when the App is mounted.
     this.getLocation();
 
-  }
+  };
 
 
   render() {
@@ -131,14 +139,15 @@ class App extends Component {
         <Header
           openMenu={this.openMenu}
           closeMenu={this.closeMenu}
-          markers={this.state.markers}
+          locations={this.state.locationList}
           updateQuery={this.updateQuery}
-          query={this.state.query}></Header>
+          query={this.state.query}
+          openInfoWindow={this.openInfoWindow}></Header>
         <Map />
         <Footer year={year} />
       </div>
     );
-  }
+  };
 }
 
 // Function to inject script into the DOM
