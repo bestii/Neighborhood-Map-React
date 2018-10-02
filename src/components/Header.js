@@ -32,6 +32,7 @@ function Header(props) {
                             if (location.showInList) {
                                 return (
                                     <li className='cursor-pointer border-bottom'
+                                        role="button"
                                         key={indx}
                                         onClick={props.openInfoWindow.bind(this, location)}>{location.name}</li>
                                 );

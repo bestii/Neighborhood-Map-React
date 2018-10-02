@@ -96,7 +96,8 @@ class App extends Component {
       });
 
       // setup the content string for each location
-      location.contentString = `${location.venue.name}`;
+      location.contentString = `<strong>${location.venue.name}</strong>
+                                <p>Address: ${location.venue.location.address} </p>`;
 
       location.name = location.venue.name;
       location.showInList = true;
